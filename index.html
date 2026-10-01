@@ -30,6 +30,12 @@
       height: 90px;
       position: relative;
       animation: pulse 1.5s infinite;
+      cursor: pointer;
+      transition: filter 0.3s ease;
+    }
+
+    .heart:hover {
+      filter: brightness(1.2);
     }
 
     .heart::before,
@@ -68,6 +74,33 @@
   </style>
 </head>
 <body>
-  <div class="heart"></div>
+  <div class="heart" id="heart"></div>
+
+  <script>
+    // Track page open event
+    gtag('event', 'page_open', {
+      'page_title': document.title,
+      'page_path': window.location.pathname
+    });
+
+    // Track time on page
+    let pageOpenTime = Date.now();
+    
+    window.addEventListener('beforeunload', function() {
+      let timeOnPage = Math.round((Date.now() - pageOpenTime) / 1000);
+      gtag('event', 'time_on_page', {
+        'seconds': timeOnPage,
+        'page_title': document.title
+      });
+    });
+
+    // Track heart clicks
+    document.getElementById('heart').addEventListener('click', function() {
+      gtag('event', 'heart_click', {
+        'interaction_type': 'click',
+        'timestamp': new Date().toISOString()
+      });
+    });
+  </script>
 </body>
 </html>
