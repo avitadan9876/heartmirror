@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HeartMirror</title>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-V8L8NCJVDX"></script>
   <script>
@@ -11,8 +12,30 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-V8L8NCJVDX');
+
+    var openedAt = Date.now();
+    var lastReportedSeconds = -1;
+    gtag('event', 'page_open', {
+      page_location: location.href,
+      page_title: document.title,
+      language: navigator.language || ''
+    });
+
+    function reportTimeOnPage() {
+      var seconds = Math.max(0, Math.round((Date.now() - openedAt) / 1000));
+      if (seconds === lastReportedSeconds) return;
+      lastReportedSeconds = seconds;
+      gtag('event', 'time_on_page', {
+        engagement_time_msec: seconds * 1000,
+        seconds_on_page: seconds
+      });
+    }
+
+    document.addEventListener('visibilitychange', function () {
+      if (document.visibilityState === 'hidden') reportTimeOnPage();
+    });
+    window.addEventListener('pagehide', reportTimeOnPage);
   </script>
-  <title>HeartMirror</title>
   <style>
     body {
       margin: 0;
