@@ -8,7 +8,7 @@
 🎭 זהו רק השער – הדף הראשי הוא הקדמה למסע הרפלקציה שלך.
 
 ## איך זה בנוי?
-- HTML ו-CSS בלבד (בלי JavaScript)
+- HTML ו-CSS, עם תג Google Analytics 4 (`G-V8L8NCJVDX`) לצפיות ב-heartmirror.art
 - מינימליסטי לגמרי, מותאם ל־GitHub Pages
 - ניתן להרחבה לעוד דפים או אפקטים
 
